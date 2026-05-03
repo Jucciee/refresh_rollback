@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Refresh Rollback",
+  "version": "1.0",
+  "description": "Saves your tab state (scroll, inputs, YouTube feed) before an F5 refresh and allows you to restore it.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "options.html",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Refresh Rollback"
+  },
+  "commands": {
+    "restore-state": {
+      "suggested_key": {
+        "default": "Alt+R",
+        "mac": "Alt+R"
+      },
+      "description": "Restore the previous tab state before the last refresh"
+    }
+  }
+}
